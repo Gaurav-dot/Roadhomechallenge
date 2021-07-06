@@ -1,0 +1,6 @@
+1. Run npm install to install the required dependencies.
+2. open the cmd with the parent folder and run
+    a. npm run start-server
+    b. npm run start
+3. Open browser and write http://localhost:8000/initTable to create collection in firebase
+4. Go to http://localhost:3000 
