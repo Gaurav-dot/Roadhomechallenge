@@ -50,8 +50,9 @@ const Theater: React.FC = () => {
     });
   }, []);
 
+  //Switch Table on double click
 
-  const moveTable = (tableUID: string) => {
+  const switchTable = (tableUID: string) => {
     sendPostRequest(`switchTable`, { tableUID }).then((response) => {
       if (response.error) {
         alert(response.error);
@@ -88,7 +89,7 @@ const Theater: React.FC = () => {
               top: table.y,
               left: table.x,
             }}
-            onDoubleClick={() => moveTable(table.id)}
+            onDoubleClick={() => switchTable(table.id)}
           >
             {tableList[table.id].users.map((user: any, i: number) => (
               <div
