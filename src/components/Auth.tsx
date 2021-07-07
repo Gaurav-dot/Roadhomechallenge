@@ -1,3 +1,5 @@
+//Page to view as the initial one
+
 import React, { useEffect } from 'react';
 import Firebase from '../services/firebase';
 import { useHistory } from 'react-router-dom';

@@ -19,12 +19,14 @@ app.use('/', require('./routes/routes'));
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
+//Collecting the bearer token from the headers
+
 async function getToken(req: any, res: any, next: any) {
   if (req.headers?.authorization?.startsWith('Bearer ')) {
-    const idToken = req.headers.authorization.split('Bearer ')[1];
+    const id = req.headers.authorization.split('Bearer ')[1];
     try {
-      const decodedToken = await auth.verifyIdToken(idToken);
-      req['currentUser'] = decodedToken;
+      const token = await auth.verifyIdToken(id);
+      req['currentUser'] = token;
     } catch (err) {
       console.log(err);
     }

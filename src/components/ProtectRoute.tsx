@@ -1,3 +1,5 @@
+// Making the route theatre as protected one
+
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import Firebase from '../services/firebase';

@@ -37,6 +37,8 @@ export const sendPostRequest = async (endpoint: string, data: any) => {
   const user = auth.currentUser;
   const token = user && (await user.getIdToken());
 
+  //Sending the bearer token in headers.
+
   const headers = {
     Accept: 'application/json',
     'Access-Control-Allow-Origin': '*',

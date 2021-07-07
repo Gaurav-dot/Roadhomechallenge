@@ -1,3 +1,5 @@
+//Frontend code to call the api's
+
 import React, { useState, useEffect } from 'react';
 import './Theater.scss';
 import MapImage from '../assets/conference-map.svg';
@@ -8,13 +10,16 @@ import { sendPostRequest } from '../apis';
 const Theater: React.FC = () => {
   const profile = Firebase.auth().currentUser;
 
+  //Creating the array of all the seats from the configuration files and empty array
+
   const initialTablesState = TableConfig.tables
     .map((t, i) => ({ order: i, key: t.id }))
     .reduce((a, v) => ({ ...a, [v.key]: { id: v.key, users: [] } }), {});
 
-  const [tablesContent, setTablesContent] = useState(initialTablesState);
+  const [tableList, settableList] = useState(initialTablesState);
   const [displayUser, setdisplayUser] = useState(false);
 
+  //calling the api to assign table
   useEffect(() => {
     sendPostRequest(`http://localhost:8000/assignTable`, { uid: profile?.uid }).then((response) => {
       console.log(("yyy"));
@@ -36,7 +41,7 @@ const Theater: React.FC = () => {
             });
           });
 
-          setTablesContent((tc) => ({
+          settableList((tc) => ({
             ...tc,
             [doc.id]: { ...tc[doc.id], users },
           }));
@@ -85,7 +90,7 @@ const Theater: React.FC = () => {
             }}
             onDoubleClick={() => moveTable(table.id)}
           >
-            {tablesContent[table.id].users.map((user: any, i: number) => (
+            {tableList[table.id].users.map((user: any, i: number) => (
               <div
                 key={user.id}
                 className={`rt-user ${profile?.uid == user.id && displayUser ? 'zoom' : ''}`}
